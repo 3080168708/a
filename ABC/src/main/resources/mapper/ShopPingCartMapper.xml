@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abc.dao.ShopPingCartDao">
+
+        <!--添加商品到购物车-->
+    <insert id="addGoodsToShopPingCart" parameterType="shopPingCart">
+        insert into t_shoppingcart(username,goodsName,goodsPrice,goodsTotal,goodsTotalPrice)values(#{username},#{goodsName},#{goodsPrice},#{goodsTotal},#{goodsTotalPrice});
+     </insert>
+
+    <!--查询某个用户下购买的所有的商品-->
+    <select id="selectUserShopPingCartGoods" parameterType="String" resultType="shopPingCart">
+        select * from t_shoppingcart where username=#{username};
+    </select>
+
+    <!--删除购物车中与id值相同的商品-->
+    <delete id="GroundsGoodsIdDeleteShopPingCartGoods" parameterType="Integer">
+        delete from t_shoppingcart where id=#{id}
+    </delete>
+
+    <!--计算购物车中购买的商品的总价-->
+    <select id="sumMoney" resultType="Integer">
+        select sum(goodsTotalPrice) from t_shoppingcart;
+    </select>
+
+    <!--查询购物车中与id值相同的商品-->
+    <select id="GroundsGoodsIdSelectShopPingCartGoods" parameterType="Integer" resultType="shopPingCart">
+        select * from t_shoppingcart where id=#{id};
+    </select>
+
+    <!--清空购物车-->
+    <delete id="EmptyShopPingCart">
+        delete from t_shoppingcart;
+    </delete>
+</mapper>
+
+
+
+
+
